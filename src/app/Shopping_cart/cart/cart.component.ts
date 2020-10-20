@@ -14,8 +14,11 @@ export class CartComponent implements OnInit, OnChanges {
   ngOnInit(): void {}
   removePhone(id: number) {
     let index: number;
-    this.listCart.findIndex((item) => item.id === id);
-    index !== -1 && this.listCart.splice(index, 1);
+    index = this.listCart.findIndex((item) => item.id === id);
+    if (index !== -1) {
+      this.listCart[index].amount = 1;
+      this.listCart.splice(index, 1);
+    }
     this.total = this.listCart.reduce((totalMoney, phone, index) => {
       totalMoney += phone.amount * phone.price;
       return totalMoney;
