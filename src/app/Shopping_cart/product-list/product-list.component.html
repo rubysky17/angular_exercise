@@ -1,0 +1,5 @@
+<div class="row">
+    <div class="col-4" *ngFor="let item of phoneList">
+        <app-produc-item [item]="item" (newProductEmitter)="addProduct($event)"></app-produc-item>
+    </div>
+</div>

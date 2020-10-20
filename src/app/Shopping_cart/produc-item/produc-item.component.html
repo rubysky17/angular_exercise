@@ -1,0 +1,15 @@
+<div class="card p-2">
+    <img style="height:280px;" [src]="item.image" class="w-100" alt="">
+    <div class="text-center">
+        <p class="lead">
+            {{item.name}}
+        </p>
+        <p class="lead">
+            {{item.description}}
+        </p>
+        <p class="lead">
+            ${{item.price}}
+        </p>
+    </div>
+    <button class="btn btn-success" (click)="addProduct(item)">Cart</button>
+</div>
