@@ -1,0 +1,11 @@
+<div class="row">
+    <div class="col-12">
+        <p class="btn btn-secondary w-100 disabled">Tài xế</p>
+    </div>
+</div>
+<div class="row text-center">
+    <div class="col-3 my-1" *ngFor="let chair of chairListArr">
+        <button class="btn btn-secondary" (click)="selectChair(chair.soGhe)"
+            [ngClass]="{'btn-success': chair.trangThai === true}">{{chair.soGhe}}</button>
+    </div>
+</div>
