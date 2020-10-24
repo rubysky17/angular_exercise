@@ -1,28 +1,46 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, DoCheck, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-chair-bill',
   templateUrl: './chair-bill.component.html',
   styleUrls: ['./chair-bill.component.scss'],
 })
-export class ChairBillComponent implements OnInit, OnChanges {
-  chairListBill = [
-    { soGhe: 3, tenGhe: 'số 3', gia: 100, trangThai: false },
-    { soGhe: 4, tenGhe: 'số 4', gia: 100, trangThai: false },
-    { soGhe: 5, tenGhe: 'số 5', gia: 100, trangThai: false },
-  ];
-  sumBill: number = this.chairListBill.reduce((sum, item, index) => {
-    sum = sum + item.gia;
-    return sum;
-  }, 0);
+export class ChairBillComponent implements OnInit, DoCheck {
+  chairListBill = [];
+  sumBill: number;
+  sumChair: number;
   @Input() selectedChair;
-  addChair() {
-    let index = this.chairListBill.findIndex(
-      (item) => (item.soGhe = this.selectedChair.soGhe)
-    );
-    index === -1 && this.chairListBill.push(this.selectedChair);
-  }
+
   constructor() {}
   ngOnInit(): void {}
-  ngOnChanges() {}
+
+  ngDoCheck() {
+    let index = this.chairListBill.findIndex(
+      (item) => item.soGhe === this.selectedChair.soGhe
+    );
+    if (index === -1) {
+      if (this.selectedChair.trangThai) {
+        this.chairListBill.push(this.selectedChair);
+      }
+    } else {
+      if (!this.selectedChair.trangThai) {
+        this.chairListBill.splice(index, 1);
+      }
+    }
+    // tính tổng số tiền
+    this.sumBill = this.chairListBill.reduce((sum, item, index) => {
+      sum = sum + item.gia;
+      return sum;
+    }, 0);
+    // tính tổng ghế
+    this.sumChair = this.chairListBill.reduce((sum, item, index) => {
+      sum = index + 1;
+      return sum;
+    }, 0);
+  }
+  cancelChair(soGhe: number) {
+    let index = this.chairListBill.findIndex((item) => item.soGhe === soGhe);
+    this.chairListBill[index].trangThai = false;
+    this.chairListBill.splice(index, 1);
+  }
 }

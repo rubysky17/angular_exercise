@@ -1,11 +1,17 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnChanges,
+  OnInit,
+  Output,
+} from '@angular/core';
 
 @Component({
   selector: 'app-chair-list',
   templateUrl: './chair-list.component.html',
   styleUrls: ['./chair-list.component.scss'],
 })
-export class ChairListComponent implements OnInit {
+export class ChairListComponent implements OnInit, OnChanges {
   chairListArr = [
     { soGhe: 1, tenGhe: 'số 1', gia: 100, trangThai: false },
     { soGhe: 2, tenGhe: 'số 2', gia: 100, trangThai: false },
@@ -45,12 +51,16 @@ export class ChairListComponent implements OnInit {
     { soGhe: 36, tenGhe: 'số 36', gia: 100, trangThai: false },
   ];
   constructor() {}
-  selectChair(soGhe) {
-    let index = this.chairListArr.findIndex((item) => (item.soGhe = soGhe));
-    this.chairListArr[index].trangThai = true;
-    // this.chairEmitter.emit(item);
-    console.log(this.chairListArr[index]);
+  chairSelected = {};
+  selectChair(chair) {
+    let index = this.chairListArr.findIndex(
+      (item) => item.soGhe === chair.soGhe
+    );
+    this.chairListArr[index].trangThai = !this.chairListArr[index].trangThai;
+    this.chairSelected = chair;
+    this.chairEmitter.emit(this.chairSelected);
   }
   @Output() chairEmitter = new EventEmitter();
   ngOnInit(): void {}
+  ngOnChanges() {}
 }

@@ -5,7 +5,7 @@
 </div>
 <div class="row text-center">
     <div class="col-3 my-1" *ngFor="let chair of chairListArr">
-        <button class="btn btn-secondary" (click)="selectChair(chair.soGhe)"
+        <button class="btn btn-secondary" (click)="selectChair(chair)"
             [ngClass]="{'btn-success': chair.trangThai === true}">{{chair.soGhe}}</button>
     </div>
 </div>
