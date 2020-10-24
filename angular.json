@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "btAngular"
+    }
+  },
+  "defaultProject": "btAngular",
+  "cli": {
+    "analytics": false
+  }
 }
