@@ -10,7 +10,6 @@ export class ChairBillComponent implements OnInit, DoCheck {
   sumBill: number;
   sumChair: number;
   @Input() selectedChair;
-
   constructor() {}
   ngOnInit(): void {}
 
